@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeApuesto - Agent</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="bg-slate-100 text-slate-800 min-h-screen flex items-center justify-center p-4">
+    <main class="max-w-md w-full bg-white p-6 rounded-2xl shadow-lg text-center space-y-4">
+      <h1 class="text-2xl font-bold text-slate-900">TeApuesto Assistant</h1>
+      <p class="text-sm text-slate-500">Generador inteligente para ventas y reportes</p>
+
+      <!-- Selector de Modo (Radio buttons estilizados como Tabs) -->
+            <div class="grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
+              <label class="cursor-pointer">
+                <input
+                  type="radio"
+                  name="agent-mode"
+                  value="/api/agents/speech"
+                  checked
+                  class="peer hidden"
+                />
+                <span class="block text-center text-xs font-bold py-2.5 px-3 rounded-lg text-slate-600 peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm transition">
+                  🗣️ Speech de Venta
+                </span>
+              </label>
+
+              <label class="cursor-pointer">
+                <input
+                  type="radio"
+                  name="agent-mode"
+                  value="/api/agents/dailyreport"
+                  class="peer hidden"
+                />
+                <span class="block text-center text-xs font-bold py-2.5 px-3 rounded-lg text-slate-600 peer-checked:bg-white peer-checked:text-indigo-600 peer-checked:shadow-sm transition">
+                  📊 Reporte Diario
+                </span>
+              </label>
+            </div>
+
+      <!-- Vista previa de la imagen seleccionada -->
+      <div id="preview-container" class="hidden relative rounded-xl overflow-hidden border border-slate-200">
+        <img id="preview-img" src="" alt="Vista previa de cuotas" class="w-full max-h-64 object-contain bg-slate-50" />
+      </div>
+
+      <!-- Input oculto para abrir la galería -->
+      <input type="file" id="image-input" accept="image/png, image/jpeg" class="hidden" />
+
+      <!-- Botón estilizado para seleccionar de la galería -->
+      <label
+        for="image-input"
+        class="block w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl shadow cursor-pointer transition"
+      >
+        🖼️ Seleccionar foto
+      </label>
+
+      <!-- Botón para procesar y enviar al backend -->
+      <button
+        id="send-btn"
+        disabled
+        class="w-full bg-slate-300 text-slate-500 font-semibold py-3 px-4 rounded-xl transition cursor-not-allowed"
+      >
+        🚀 Generar Resultado
+      </button>
+
+      <!-- Estado actual de la petición -->
+      <p id="status" class="text-sm font-medium text-slate-600 min-h-[20px] whitespace-pre-wrap"></p>
+      <!-- Contenedor del Speech de respuesta (Oculto inicialmente) -->
+            <div id="result-container" class="hidden space-y-3 pt-2 text-left">
+                <label id="output-label" for="speech-output" class="block text-xs font-bold text-slate-500 uppercase tracking-wider">
+                          Resultado Generado:
+                        </label>
+
+              <textarea
+                id="speech-output"
+                readonly
+                rows="8"
+                class="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-sm leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500 font-sans"
+              ></textarea>
+
+              <button
+                id="copy-btn"
+                class="w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2.5 px-4 rounded-xl shadow flex items-center justify-center gap-2 transition cursor-pointer"
+              >
+                📋 Copiar al Portapapeles
+              </button>
+            </div>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
